@@ -5,3 +5,5 @@ This tool was built to help teams search and manage their member directory quick
  feature/readme-update
 
  Run the tool with: python team_directory.py
+
+    Contributions are welcome via pull request.
