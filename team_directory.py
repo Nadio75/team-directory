@@ -15,6 +15,9 @@ def display_team(team):
     for member in team:
         print(f"{member['name']} - {member['role']} ({member['email']})")
 
+def search_by_name(team, query):
+    return [m for m in team if query.lower() in m["name"].lower()]
+
 if __name__ == "__main__":
     team = load_team()
     display_team(team)
