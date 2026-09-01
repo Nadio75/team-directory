@@ -83,3 +83,20 @@ When I tried to push locally after making a commit while GitHub already had a ne
 
 
 When I tried to push a local commit while GitHub already had a newer commit (simulating a teammate's direct web edit), the push was rejected with a "fetch first" / non-fast-forward error, since my local main didn't include that commit as an ancestor. I ran git pull --rebase, which replayed my local commit on top of the remote one this caused a real conflict in README.md since both edits touched the same area, so I resolved it manually, staged the file, and continued the rebase. Along the way I also had to clean up a commit that still had leftover conflict-marker artifacts, using git commit --amend since it hadn't diverged from GitHub in a breaking way. git pull --rebase was the correct move here rather than force-pushing, because force-pushing would have thrown away the "teammate's" commit entirely pull --rebase integrates both changes instead of discarding either one.
+
+## Part 5
+## 1. What made a commit high-value in this project
+
+I prioritised splitting commits by capability the entry point script, the data file, wiring them together, adding search, adding role filtering, and the CI workflow each got their own commit, since each represents something a reviewer could isolate or revert independently. One thing I deliberately bundled: early on I had an accidental empty-file commit followed by a fix: rather than leaving two low-value commits in history, I used git reset --soft to squash them into a single clean commit before pushing, since the intermediate broken state added no value to anyone reading the log later.
+
+## 2. My merge vs. rebase choice
+
+For the intentional conflict in Part 3, I used a normal merge (not rebase), matching my Question 2 answer — I wanted the merge commit to stand as visible proof that a real conflict occurred and was reconciled, rather than rewriting the timeline to hide that divergence. For the later rebase task, I deliberately used rebase instead, to produce a linear history for a short-lived branch where preserving the parallel timeline wasn't important.
+
+## 3. The rejected push
+
+When I tried to push a local commit while GitHub already had a newer commit from a simulated teammate's direct web edit, my push was rejected with a non-fast-forward error. I ran git pull --rebase, which triggered a real conflict since both edits touched the same file. I resolved it manually and continued the rebase. git pull --rebase was the correct recovery rather than force-pushing, because force-pushing would have discarded the teammate's commit entirely, while rebase integrated both sets of changes without losing either.
+
+## 4. One thing that surprised me
+
+I was surprised by how messy things got even in a repo with only one contributor (me) at one point I ended up with a duplicate-looking commit and leftover conflict markers accidentally committed, purely from moving fast through nested conflicts and an amend. It taught me that git operations that seem "done" (like completing a rebase) are worth double-checking with git status and by actually reading the file content afterward, rather than assuming success just because no error appeared.
