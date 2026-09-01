@@ -18,6 +18,9 @@ def display_team(team):
 def search_by_name(team, query):
     return [m for m in team if query.lower() in m["name"].lower()]
 
+def filter_by_role(team, role):
+    return [m for m in team if m["role"].lower() == role.lower()]
+
 if __name__ == "__main__":
     team = load_team()
     display_team(team)
