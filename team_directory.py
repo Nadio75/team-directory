@@ -22,3 +22,7 @@ if __name__ == "__main__":
     team = load_team()
     display_team(team)
     print(f"\nTotal members: {len(team)}")
+
+    results = search_by_name(team, "a")
+    print("\nSearch results for 'a':")
+    display_team(results)
