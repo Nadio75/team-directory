@@ -4,8 +4,12 @@
 import json
 
 def load_team(filepath="team.json"):
-    with open(filepath, "r") as f:
-        return json.load(f)
+    try:
+        with open(filepath, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print(f"Error: {filepath} not found.")
+        return []
 
 def display_team(team):
     for member in team:
