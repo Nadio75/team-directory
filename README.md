@@ -1,3 +1,5 @@
+[![Verify required files](https://github.com/Nadio75/team-directory/actions/workflows/verify.yml/badge.svg)](https://github.com/Nadio75/team-directory/actions/workflows/verify.yml)
+
 # Team Directory
 
 Team Directory is a simple command-line tool for listing and searching team members. This tool was built to help teams search and manage their member directory quickly.
