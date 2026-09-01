@@ -1,0 +1,1 @@
+This tool was built to help teams search and manage their member directory quickly.
