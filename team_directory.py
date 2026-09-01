@@ -14,3 +14,4 @@ def display_team(team):
 if __name__ == "__main__":
     team = load_team()
     display_team(team)
+    print(f"\nTotal members: {len(team)}")
