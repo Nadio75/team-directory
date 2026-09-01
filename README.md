@@ -1,0 +1,1 @@
+Team Directory is a simple command-line tool for listing and searching team members.
