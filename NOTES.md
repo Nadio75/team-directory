@@ -100,3 +100,35 @@ When I tried to push a local commit while GitHub already had a newer commit from
 ## 4. One thing that surprised me
 
 I was surprised by how messy things got even in a repo with only one contributor (me) at one point I ended up with a duplicate-looking commit and leftover conflict markers accidentally committed, purely from moving fast through nested conflicts and an amend. It taught me that git operations that seem "done" (like completing a rebase) are worth double-checking with git status and by actually reading the file content afterward, rather than assuming success just because no error appeared.
+
+
+## Assignment 1.2
+
+### Question 1 — Why fork, not branch, this time?
+
+In 1.1, I had write access to my own repo, so branching directly inside it was enough. Here, I don't have write access to my partner's repo if I tried to clone it and push a branch directly, GitHub would reject the push, since I'm not a collaborator on their repo. Forking solves this by giving me my own full copy (under my own account) that I do have write access to. I can branch and push freely there, and then use a Pull Request to formally propose merging my fork's branch into their original repo — the PR is the mechanism that lets someone review and accept outside contributions without ever giving me direct write access to their repo.
+
+### Question 2 — PR description: bad vs. good
+
+**Low-effort version:**
+"added search"
+
+**Good version (what/why/how-to-verify):**
+
+What: Adds a `search_by_role()` function and wires it into the CLI, letting users filter the team list by role instead of only viewing the full list.
+
+Why: The existing tool could only search by name; teams often want to find everyone in a specific role, which wasn't possible before.
+
+How to verify: Run the tool and confirm only members with that role are printed, and that it handles no matches gracefully.
+
+What makes the second easier to review: it tells the reviewer exactly what changed, why it was needed, and gives them a concrete, repeatable way to confirm it actually works without needing to read every line of the diff cold to guess the intent.
+
+### Question 3 — Triaging review comments
+
+A blocking comment points to something that must change before merge a bug, a missing edge case, or something that would break for another user. A nit/suggestion is a style or preference-level comment that would be nice but isn't necessary. A question is the reviewer trying to understand my reasoning, not necessarily asking for a change. My rule when a comment isn't labeled: if fixing it changes what the program does or how it handles input, I treat it as blocking; if it's purely about style/readability with no behavior impact, I treat it as a nit unless the reviewer says otherwise.
+
+### Question 4 — When fetch beats pull
+
+A realistic moment: right before merging my partner's PR into my repo, or before pulling their merged contribution into my local main, I'd want to run `git fetch` and inspect `origin/main` first to check what's actually there before merging it into my working branch rather than blindly pulling and potentially merging in a change I haven't looked at yet.
+
+**No-Partner Fallback note:** I used a second personal GitHub account (mlambodaniel32-design) to play the "partner" role for this assignment, since I didn't have another trainee to pair with. I completed every step exactly as written, including opening real PRs in both directions, leaving genuine review comments from the second account, and responding to them as though they came from someone else.
