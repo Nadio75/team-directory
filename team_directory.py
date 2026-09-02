@@ -2,6 +2,7 @@
 """Simple Team Directory CLI."""
 
 import json
+import re
 
 def load_team(filepath="team.json"):
     try:
@@ -21,10 +22,19 @@ def search_by_name(team, query):
 def filter_by_role(team, role):
     return [m for m in team if m["role"].lower() == role.lower()]
 
+def has_valid_email(member):
+    pattern = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+    return bool(re.match(pattern, member.get("email", "")))
+
 if __name__ == "__main__":
     team = load_team()
+    team = sort_by_name(team)
     display_team(team)
     print(f"\nTotal members: {len(team)}")
+
+    invalid = [m for m in team if not has_valid_email(m)]
+    if invalid:
+        print(f"\nWarning: {len(invalid)} member(s) have invalid email format.")
 
     results = search_by_name(team, "a")
     print("\nSearch results for 'a':")
