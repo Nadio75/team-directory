@@ -28,8 +28,13 @@ def has_valid_email(member):
 
 if __name__ == "__main__":
     team = load_team()
+    team = sort_by_name(team)
     display_team(team)
     print(f"\nTotal members: {len(team)}")
+
+    invalid = [m for m in team if not has_valid_email(m)]
+    if invalid:
+        print(f"\nWarning: {len(invalid)} member(s) have invalid email format.")
 
     results = search_by_name(team, "a")
     print("\nSearch results for 'a':")
